@@ -1,17 +1,26 @@
 {
-  "name": "persona-generator",
+  "name": "pipo-persona-generator",
   "version": "0.1.0",
+  "homepage": "https://pipo-persona-generator.web.app/",
+  "description": "Esse projeto contem um gerador de personas para contratação que pode ser utilizado pelo RH das empresas, facilitando o processo de criar vagas.",
   "private": true,
+  "author": {
+    "name": "Lukan Vanderlinde",
+    "email": "lukanvanderlinde@gmail.com",
+    "url": "https://lukan.rocks"
+  },
+  "license": "ISC",
   "dependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "react-scripts build",
+    "deploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
