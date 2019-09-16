@@ -1,0 +1,43 @@
+.pdf-body {
+  width: 210mm !important;
+  height: 297mm !important;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.23);
+  box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.23);
+}
+
+.box-description {
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.side-bar {
+  background-color: #f8f8fd;
+  padding: 2rem;
+}
+
+.header-vaga {
+  color: #ffe412;
+  text-transform: uppercase;
+}
+
+.logo {
+  margin-left: 1rem;
+  max-height: 1.5rem;
+}
+
+.pdf-mocinha {
+  height: 12rem;
+}
+
+.notas {
+  background-color: #d8d7e2;
+  border-radius: 5px;
+  height: 12rem;
+}
+
+.main-body {
+  padding: 2rem;
+}

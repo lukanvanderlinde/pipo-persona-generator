@@ -1,0 +1,13 @@
+@media (orientation: landscape) {
+  .main-footer {
+    text-align: center;
+    padding: 3rem;
+  }
+}
+
+@media (orientation: portrait) {
+  .main-footer {
+    text-align: center;
+    margin: 1rem auto 2rem;
+  }
+}
