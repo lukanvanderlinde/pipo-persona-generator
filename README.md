@@ -21,7 +21,7 @@
 
 Caso não utilize o firebase, pode remover ele do fundo do html e modificar os scripts no package.json
 
-Adicionar o código do google analytics no header
+Ele já tem o tracking do GA, basta adicionar o código do no header do index.html na pasta public.
 
 ## Estrutura do projeto
 
@@ -63,9 +63,3 @@ Esse comando constroi a aplicação para produção criando uma pasta chamada `b
 ### `npm run deploy`
 
 Esse comando coloca a aplicação em produção, os arquivos da pasta `build` serão enviados para o projeto no Google Firebase.<br>
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
