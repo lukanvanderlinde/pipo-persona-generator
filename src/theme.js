@@ -6,11 +6,46 @@ import TruenoBlk from './fonts/TruenoBlk.otf';
 
 const theme = createMuiTheme({
   overrides: {
+    MuiSlider: {
+      root: {
+        '&$disabled': {
+          color: '#6442fb'
+        }
+      },
+      markLabel: {
+        fontSize: '0.5rem',
+        marginTop: '-2rem'
+      }
+    },
     MuiButton: {
       root: { borderRadius: '10rem' }
     },
     MuiButtonGroup: {
       root: { borderRadius: '10rem' }
+    },
+    MuiToggleButton: {
+      root: {
+        borderRadius: '10rem',
+        color: '#6442fb',
+        border: '1px solid #6442fb',
+        '&$selected': {
+          color: '#ffffff',
+          backgroundColor: '#6442fb',
+          '&:hover': {
+            color: '#ffffff',
+            backgroundColor: '#311b92'
+          }
+        },
+        '&:hover': {
+          color: '#ffffff',
+          backgroundColor: '#311b92'
+        }
+      }
+    },
+    MuiToggleButtonGroup: {
+      root: {
+        borderRadius: '10rem'
+      }
     }
   },
   palette: {
@@ -65,6 +100,20 @@ const theme = createMuiTheme({
       ],
       color: '#747c8f',
       fontSize: '1.375rem',
+      src: `url(${TruenoRg}) format('otf')`
+    },
+    h4: {
+      fontFamily: [
+        'TruenoBlk',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"'
+      ],
+      color: '#36393d',
+      fontSize: '0.8rem',
+      textTransform: 'uppercase',
       src: `url(${TruenoRg}) format('otf')`
     },
     body1: {

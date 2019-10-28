@@ -8,7 +8,7 @@ import PipoHeader from '../../components/PipoHeader';
 import PipoForm from '../../components/PipoForm';
 import PipoFooter from '../../components/PipoFooter';
 
-import mocinha from '../../assets/images/mocinha@3x.png';
+import mocinha from '../../images/mocinha@3x.png';
 
 const HomePage = ({ match }) => {
   const formsPage = match.params.formState;

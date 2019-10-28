@@ -11,12 +11,11 @@ import HomePage from './routes/HomePage';
 import { ThemeProvider } from '@material-ui/styles';
 
 // * TODOs *
-// TODO: Implementar o webhook que envia os dados para o backend via zapier
+// https://mailboxlayer.com/documentation
 // TODO: Definir o theme - color de acordo com o branding.
 // TODO: Definir a description para ter um SEO melhor.
 // TODO: Adicionar um favicon.
 // TODO: Manipular o manifesto.
-// TODO: COlocar emojis
 
 const LandingPage = () => (
   <ThemeProvider theme={theme}>

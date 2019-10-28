@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 import {
   Slider,
-  Button,
   OutlinedInput,
-  ButtonGroup,
   Grid,
   Typography,
   Box
@@ -24,7 +22,7 @@ import StackOverflow from '../../icons/StackOverflow';
 import Twitter from '../../icons/Twitter';
 import Youtube from '../../icons/Youtube';
 
-import ToggleButton from '@material-ui/lab/ToggleButton';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
 import FormNav from './FormNav';
 import RangeSlider from '../RangeSlider';
@@ -70,10 +68,12 @@ class FormPagination extends Component {
         disponiveis: 0,
         notas: ''
       };
+
   constructor(props) {
     super(props);
     if (this.props.formsPage) this.state.step = parseInt(this.props.formsPage);
   }
+
   AdapterLink = React.forwardRef((props, ref) => (
     <Link innerRef={ref} {...props} />
   ));
@@ -88,6 +88,12 @@ class FormPagination extends Component {
     let { step } = this.state;
     this.setState({ step: --step });
     localStorage.setItem('form-response', JSON.stringify(this.state));
+  };
+
+  handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      console.log('enter press here! ');
+    }
   };
 
   render() {
@@ -134,40 +140,31 @@ class FormPagination extends Component {
                 <Grid container spacing={6}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Sua persona precisa falar inglês?
+                      Sua persona precisa falar inglês? 🇺🇸
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <ButtonGroup size='small'>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ ingles: 'Básico' });
-                        }}>
+                    <ToggleButtonGroup
+                      value={this.state.ingles}
+                      color='primary'
+                      exclusive
+                      size='small'
+                      onChange={(event, value) => {
+                        this.setState({ ingles: value });
+                      }}>
+                      <ToggleButton value='Básico' color='primary'>
                         Básico
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ ingles: 'Intermediário' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Intermediário' color='primary'>
                         Intermediário
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ ingles: 'Avançado' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Avançado' color='primary'>
                         Avançado
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ ingles: 'Fluente' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Fluente' color='primary'>
                         Fluente
-                      </Button>
-                    </ButtonGroup>
+                      </ToggleButton>
+                    </ToggleButtonGroup>
                   </Grid>
                 </Grid>
               </Grid>
@@ -176,39 +173,30 @@ class FormPagination extends Component {
               <Grid item xs={12}>
                 <Grid container spacing={6}>
                   <Grid item xs={12}>
-                    <Typography variant='h3'>E que tal espanhol?</Typography>
+                    <Typography variant='h3'>E que tal espanhol? 🇪🇸</Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <ButtonGroup size='small'>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ espanhol: 'Básico' });
-                        }}>
+                    <ToggleButtonGroup
+                      value={this.state.espanhol}
+                      color='primary'
+                      exclusive
+                      size='small'
+                      onChange={(event, value) => {
+                        this.setState({ espanhol: value });
+                      }}>
+                      <ToggleButton value='Básico' color='primary'>
                         Básico
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ espanhol: 'Intermediário' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Intermediário' color='primary'>
                         Intermediário
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ espanhol: 'Avançado' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Avançado' color='primary'>
                         Avançado
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ espanhol: 'Fluente' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Fluente' color='primary'>
                         Fluente
-                      </Button>
-                    </ButtonGroup>
+                      </ToggleButton>
+                    </ToggleButtonGroup>
                   </Grid>
                 </Grid>
               </Grid>
@@ -225,7 +213,7 @@ class FormPagination extends Component {
                     <RangeSlider
                       min={18}
                       max={70}
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay='age'
                       defaultValue={this.state.idade}
                       onChangeCommitted={(event, value) => {
                         this.setState({ idade: value });
@@ -257,7 +245,7 @@ class FormPagination extends Component {
               {/* TITULO */}
               <Grid item xs={12}>
                 <Typography variant='h2'>
-                  Agora um pouco da formação acadêmica da sua persona
+                  Para comerçar, vamos falar de formação acadêmica.
                 </Typography>
               </Grid>
 
@@ -266,11 +254,12 @@ class FormPagination extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Sua persona possui uma Graduação Superior?
+                      Seu candidato ideal possui Graduação Superior? Qual curso?
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <OutlinedInput
+                      onKeyPress={this.handleKeyPress}
                       id='component-outlined'
                       placeholder='Qual curso?'
                       fullWidth
@@ -288,11 +277,12 @@ class FormPagination extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Sua persona possui uma Pós-Graduação?
+                      E Pós-Graduação? Qual tipo?
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <OutlinedInput
+                      onKeyPress={this.handleKeyPress}
                       id='component-outlined'
                       placeholder='Qual especialização?'
                       fullWidth
@@ -318,11 +308,11 @@ class FormPagination extends Component {
       case 2:
         return (
           <Box>
-            <Grid container spacing={6}>
+            <Grid container spacing={8}>
               {/* TITULO */}
               <Grid item xs={12}>
                 <Typography variant='h2'>
-                  E que tal suas características mais pessoais?
+                  Como é a personalidade desta pessoa?
                 </Typography>
               </Grid>
 
@@ -331,8 +321,7 @@ class FormPagination extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Escolha algumas palavras-chave para descrever as
-                      caracteristicas dela.
+                      Defina algumas palavras-chave para te ajudar.
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
@@ -366,7 +355,7 @@ class FormPagination extends Component {
                 <Grid container spacing={6}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Vamos falar um pouco da sua personalidade mais ideal
+                      E como é o perfil comportamental?
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
@@ -374,14 +363,14 @@ class FormPagination extends Component {
                       min={1}
                       max={5}
                       defaultValue={3}
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay='off'
                       defaultValue={this.state.introvertido}
                       onChangeCommitted={(event, value) => {
                         this.setState({ introvertido: value });
                       }}
                       marks={[
-                        { value: 2, label: 'INTROVERTIDO' },
-                        { value: 4, label: 'EXTROVERTIDO' }
+                        { value: 1, label: 'INTROVERTIDO' },
+                        { value: 5, label: 'EXTROVERTIDO' }
                       ]}
                     />
                   </Grid>
@@ -390,14 +379,14 @@ class FormPagination extends Component {
                       min={1}
                       max={5}
                       defaultValue={3}
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay='off'
                       defaultValue={this.state.racional}
                       onChangeCommitted={(event, value) => {
                         this.setState({ racional: value });
                       }}
                       marks={[
-                        { value: 2, label: 'RACIONAL' },
-                        { value: 4, label: 'PASSIONAL' }
+                        { value: 1, label: 'RACIONAL' },
+                        { value: 5, label: 'PASSIONAL' }
                       ]}
                     />
                   </Grid>
@@ -406,14 +395,14 @@ class FormPagination extends Component {
                       min={1}
                       max={5}
                       defaultValue={3}
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay='off'
                       defaultValue={this.state.flexivo}
                       onChangeCommitted={(event, value) => {
                         this.setState({ flexivo: value });
                       }}
                       marks={[
-                        { value: 2, label: 'FLEXIVO' },
-                        { value: 4, label: 'RIGIDO' }
+                        { value: 1, label: 'FLEXIVO' },
+                        { value: 5, label: 'RIGIDO' }
                       ]}
                     />
                   </Grid>
@@ -422,14 +411,14 @@ class FormPagination extends Component {
                       min={1}
                       max={5}
                       defaultValue={3}
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay='off'
                       defaultValue={this.state.passivo}
                       onChangeCommitted={(event, value) => {
                         this.setState({ passivo: value });
                       }}
                       marks={[
-                        { value: 2, label: 'PASSIVO' },
-                        { value: 4, label: 'ATIVO' }
+                        { value: 1, label: 'PASSIVO' },
+                        { value: 5, label: 'ATIVO' }
                       ]}
                     />
                   </Grid>
@@ -437,168 +426,6 @@ class FormPagination extends Component {
               </Grid>
             </Grid>
 
-            {/* REDES SOCIAIS */}
-            <Grid item xs={12}>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Typography variant='h3'>
-                    Quais redes socias ela usaria?
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Box>
-                    <ToggleButton
-                      value='behance'
-                      selected={this.state.redesSociais.behance}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.behance = !_redesSociais.behance;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Behance />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='facebook'
-                      selected={this.state.redesSociais.facebook}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.facebook = !_redesSociais.facebook;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Facebook />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='instagram'
-                      selected={this.state.redesSociais.instagram}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.instagram = !_redesSociais.instagram;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Instagram />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='linkedin'
-                      selected={this.state.redesSociais.linkedin}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.linkedin = !_redesSociais.linkedin;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Linkedin />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='medium'
-                      selected={this.state.redesSociais.medium}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.medium = !_redesSociais.medium;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Medium />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='meetup'
-                      selected={this.state.redesSociais.meetup}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.meetup = !_redesSociais.meetup;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Meetup />
-                    </ToggleButton>
-                  </Box>
-                </Grid>
-                <Grid item xs={12}>
-                  <Box>
-                    <ToggleButton
-                      value='pinterest'
-                      selected={this.state.redesSociais.pinterest}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.pinterest = !_redesSociais.pinterest;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Pinterest />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='Reddit'
-                      selected={this.state.redesSociais.Reddit}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.Reddit = !_redesSociais.Reddit;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Reddit />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='soundcloud'
-                      selected={this.state.redesSociais.soundcloud}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.soundcloud = !_redesSociais.soundcloud;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <SoundCloud />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='stackoverflow'
-                      selected={this.state.redesSociais.stackoverflow}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.stackoverflow = !_redesSociais.stackoverflow;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <StackOverflow />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='twitter'
-                      selected={this.state.redesSociais.twitter}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.twitter = !_redesSociais.twitter;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Twitter />
-                    </ToggleButton>
-                    <ToggleButton
-                      value='youtube'
-                      selected={this.state.redesSociais.youtube}
-                      onChange={() => {
-                        const _redesSociais = this.state.redesSociais;
-                        _redesSociais.youtube = !_redesSociais.youtube;
-                        this.setState({
-                          redesSociais: _redesSociais
-                        });
-                      }}>
-                      <Youtube />
-                    </ToggleButton>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Grid>
             <FormNav
               Previus={'/1'}
               Next={'/3'}
@@ -616,7 +443,7 @@ class FormPagination extends Component {
               {/* TITULO */}
               <Grid item xs={12}>
                 <Typography variant='h2'>
-                  vamos falar um pouco de suas qualidades
+                  Alguma habilidade específica?
                 </Typography>
               </Grid>
 
@@ -625,8 +452,8 @@ class FormPagination extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Quais habilidades essa persona precisa ter? Se preferir
-                      digite suas habilidades essenciais.
+                      Defina abaixo quais são aquelas habilidades que não podem
+                      faltar no CV.
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
@@ -649,6 +476,197 @@ class FormPagination extends Component {
                         this.setState(() => this.state.habilidades.pop(index))
                       }
                     />
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              {/* REDES SOCIAIS */}
+              <Grid item xs={12}>
+                <Grid container spacing={4}>
+                  <Grid item xs={12}>
+                    <Typography variant='h3'>
+                      Quais redes socias ela usaria?
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <Grid container>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='behance'
+                              selected={this.state.redesSociais.behance}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.behance = !_redesSociais.behance;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Behance />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='facebook'
+                              selected={this.state.redesSociais.facebook}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.facebook = !_redesSociais.facebook;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Facebook />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='instagram'
+                              selected={this.state.redesSociais.instagram}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.instagram = !_redesSociais.instagram;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Instagram />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='linkedin'
+                              selected={this.state.redesSociais.linkedin}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.linkedin = !_redesSociais.linkedin;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Linkedin />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='medium'
+                              selected={this.state.redesSociais.medium}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.medium = !_redesSociais.medium;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Medium />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='meetup'
+                              selected={this.state.redesSociais.meetup}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.meetup = !_redesSociais.meetup;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Meetup />
+                            </ToggleButton>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Grid container>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='pinterest'
+                              selected={this.state.redesSociais.pinterest}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.pinterest = !_redesSociais.pinterest;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Pinterest />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='Reddit'
+                              selected={this.state.redesSociais.Reddit}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.Reddit = !_redesSociais.Reddit;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Reddit />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='soundcloud'
+                              selected={this.state.redesSociais.soundcloud}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.soundcloud = !_redesSociais.soundcloud;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <SoundCloud />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='stackoverflow'
+                              selected={this.state.redesSociais.stackoverflow}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.stackoverflow = !_redesSociais.stackoverflow;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <StackOverflow />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='twitter'
+                              selected={this.state.redesSociais.twitter}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.twitter = !_redesSociais.twitter;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Twitter />
+                            </ToggleButton>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <ToggleButton
+                              value='youtube'
+                              selected={this.state.redesSociais.youtube}
+                              onChange={() => {
+                                const _redesSociais = this.state.redesSociais;
+                                _redesSociais.youtube = !_redesSociais.youtube;
+                                this.setState({
+                                  redesSociais: _redesSociais
+                                });
+                              }}>
+                              <Youtube />
+                            </ToggleButton>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
@@ -679,11 +697,12 @@ class FormPagination extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Qual vai ser o nome da vaga?
+                      Qual o nome da posição que ela irá ocupar?
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <OutlinedInput
+                      onKeyPress={this.handleKeyPress}
                       id='component-outlined'
                       placeholder='Vaga'
                       fullWidth
@@ -700,48 +719,33 @@ class FormPagination extends Component {
               <Grid item xs={12}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
-                    <Typography variant='h3'>
-                      Qual é o nível de senioridade esperado?
-                    </Typography>
+                    <Typography variant='h3'>E qual o nível?</Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <ButtonGroup size='small'>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ senioridade: 'Estágio' });
-                        }}>
+                    <ToggleButtonGroup
+                      value={this.state.senioridade}
+                      color='primary'
+                      exclusive
+                      size='small'
+                      onChange={(event, value) => {
+                        this.setState({ senioridade: value });
+                      }}>
+                      <ToggleButton value='Estágio' color='primary'>
                         Estágio
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ senioridade: 'Trainee' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Trainee' color='primary'>
                         Trainee
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ senioridade: 'Júnior' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Júnior' color='primary'>
                         Júnior
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ senioridade: 'Pleno' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Pleno' color='primary'>
                         Pleno
-                      </Button>
-                      <Button
-                        color='primary'
-                        onClick={() => {
-                          this.setState({ senioridade: 'Sênior' });
-                        }}>
+                      </ToggleButton>
+                      <ToggleButton value='Sênior' color='primary'>
                         Sênior
-                      </Button>
-                    </ButtonGroup>
+                      </ToggleButton>
+                    </ToggleButtonGroup>
                   </Grid>
                 </Grid>
               </Grid>
@@ -751,14 +755,15 @@ class FormPagination extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Qual é o salário disponível para essa vaga?
+                      E o salário disponível?
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <RangeSlider
+                      step={500}
                       min={0}
                       max={20000}
-                      valueLabelDisplay='auto'
+                      valueLabelDisplay='money'
                       defaultValue={this.state.salario}
                       onChangeCommitted={(event, value) => {
                         this.setState({ salario: value });
@@ -773,11 +778,12 @@ class FormPagination extends Component {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Typography variant='h3'>
-                      Quantas vagas você tem disponíveis?
+                      Há quantas vagas para esta posição?
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <OutlinedInput
+                      onKeyPress={this.handleKeyPress}
                       type='number'
                       id='component-outlined'
                       placeholder={
@@ -812,8 +818,7 @@ class FormPagination extends Component {
               {/* TITULO */}
               <Grid item xs={12}>
                 <Typography variant='h2'>
-                  Pra fechar, acrescente algumas notas pra ajudar o seu time a
-                  entender melhor quem vocês buscam
+                  Para fechar, algo a mais que seu time precise saber?
                 </Typography>
               </Grid>
 
@@ -821,7 +826,7 @@ class FormPagination extends Component {
               <Grid item xs={12}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
-                    <Typography variant='h3'>solta a verba vai!</Typography>
+                    <Typography variant='h3'>Conta mais!</Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <OutlinedInput

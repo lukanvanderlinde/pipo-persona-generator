@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 
-import logo from '../../assets/logo.svg';
+import logo from '../../images/logo.svg';
 
 const PipoFooter = () => (
   <footer className='main-footer'>

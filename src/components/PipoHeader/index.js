@@ -9,10 +9,13 @@ import './index.css';
 const PipoHeader = () => {
   return (
     <header className='header'>
-      <Typography variant='h1'>Bem vindo ao gerador de personas</Typography>
+      <Typography variant='h1'>
+        Olá 👋 Vamos criar o perfil de candidato ideal?
+      </Typography>
       <Typography variant='body1'>
-        Crie a Persona Ideal para vaga que você precisa preencher e compartilhe
-        esse perfil com todo o seu time!
+        Com o Gerador de Candidatos da Pipo, você cria e compartilha a persona
+        do seu candidato ideal para que todos possam entender quem é a pessoa
+        certa para a vaga.
       </Typography>
       <React.Fragment>
         <Button

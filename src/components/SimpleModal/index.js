@@ -1,68 +1,114 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+import React, { Component } from 'react';
+import { Button, Box } from '@material-ui/core';
+
+import onboardingPasso1 from '../../images/onboardingPasso1.png';
+import onboardingPasso2 from '../../images/onboardingPasso2.png';
+import onboardingPasso3 from '../../images/onboardingPasso3.png';
+
+import ModalTemplate from './ModalTemplate';
 
 import './index.css';
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
+class SimpleModal extends Component {
+  constructor() {
+    super();
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    outline: 0,
-    textAlign: 'center'
+    this.state = {
+      step: 1,
+      open: false
+    };
   }
-}));
 
-function SimpleModal() {
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
+  handleOpen = () => {
+    this.setState({ open: true });
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  handleClose = () => {
+    this.setState({ open: false });
+    this.setState({ step: 1 });
   };
-  return (
-    <div className='modal'>
-      <Button size='large' color='secondary' onClick={handleOpen}>
-        Saiba mais
-      </Button>
-      <Modal open={open} onClose={handleClose}>
-        <div style={modalStyle} className={classes.paper}>
-          <h2>O que é?</h2>
-          <p>
-            Uma persona é um modelo ficcional para definir a pessoa ideal para a
-            vaga.
-          </p>
-          <img src='../../assets/images/onboarding-passo-1.png' alt=' ' />
-          <Button color='secondary' onClick={handleClose}>
-            Voltar
-          </Button>
-          <Button size='large' variant='contained' color='primary'>
-            Próximo
-          </Button>
-        </div>
-      </Modal>
-    </div>
-  );
+
+  handleCloseWhitScroll = () => {
+    this.setState({ open: false }, () =>
+      this.setState({ step: 1 }, () => {
+        const elmnt = document.getElementById('form-content');
+
+        elmnt.scrollIntoView({
+          behavior: 'smooth'
+        });
+      })
+    );
+  };
+
+  nextStep = () => {
+    this.setState({ step: ++this.state.step });
+  };
+
+  previusStep = () => {
+    this.setState({ step: --this.state.step });
+  };
+
+  render() {
+    const { step } = this.state;
+
+    switch (step) {
+      case 1:
+        return (
+          <Box component='span'>
+            <Button size='large' color='secondary' onClick={this.handleOpen}>
+              Saber mais
+            </Button>
+            <ModalTemplate
+              NextStep={this.nextStep}
+              PreviusStep={this.handleClose}
+              ModalTitle='O que é?'
+              ModalDesctiption='Uma persona é um modelo ficcional para definir a 
+pessoa ideal para a vaga.'
+              ModalImage={onboardingPasso1}
+              HandleClose={this.handleClose}
+              Open={this.state.open}
+            />
+          </Box>
+        );
+        break;
+      case 2:
+        return (
+          <Box component='span'>
+            <Button size='large' color='secondary' onClick={this.handleOpen}>
+              Saber mais
+            </Button>
+            <ModalTemplate
+              NextStep={this.nextStep}
+              PreviusStep={this.previusStep}
+              ModalTitle='Como funciona?'
+              ModalDesctiption='Nosso gerador de personas te fará algumas perguntas sobre personalidade, habilidas específicas e características gerais da pessoa que você busca. Ao final, você terá um documento pdf super claro e organizado para compartilhar com todo o seu time.'
+              ModalImage={onboardingPasso2}
+              HandleClose={this.handleClose}
+              Open={this.state.open}
+            />
+          </Box>
+        );
+        break;
+      case 3:
+        return (
+          <Box component='span'>
+            <Button size='large' color='secondary' onClick={this.handleOpen}>
+              Saber mais
+            </Button>
+            <ModalTemplate
+              NextStep={this.handleCloseWhitScroll}
+              PreviusStep={this.previusStep}
+              ModalTitle='Pra que serve?'
+              ModalDesctiption='Com o nosso criador de personas, você consegue rapidamente criar uma documento para o time todo, com traços de personalidade, habilidades específicas e características demográficas para buscar nos candidatos que aplicam pra vaga.'
+              ModalImage={onboardingPasso3}
+              HandleClose={this.handleClose}
+              Open={this.state.open}
+            />
+          </Box>
+        );
+        break;
+    }
+  }
 }
 
 export default SimpleModal;

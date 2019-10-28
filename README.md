@@ -1,81 +1,71 @@
+# Pipo: Gerador de Personana
 
+## Sobre o projeto
 
------
-o costructor numa class é a primeira funcao chamada
+### Tecnologias
 
-quando herdamos outra classe é legal chamar o super() caso criarmos outro constructor
+- React 16.9.0
+- React Router 5.0.1
 
-o prefix static faz com que o metodo não enxergue o resto da classe, é bom para não gerar dependencias.
+### Dependências
 
-desustruturacao de objto é louco
+- Material UI
+- html2canvas
+- jspdf
 
-...rest e spread
+#### Dependências Opcionais
 
-async await
-
-
-
-----------------
+- Google Firebase
+- Google Analytics
+- Zapier
 
 Caso não utilize o firebase, pode remover ele do fundo do html e modificar os scripts no package.json
 
 Adicionar o código do google analytics no header
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Estrutura do projeto
 
-## Available Scripts
+.
++-- README.md
++-- package.json
++-- package-lock.json
++-- firebase.json
++-- firebasesrc.json
++-- src
+| +-- theme.js
+| +-- index.js
+| +-- services
+| +-- routes
+| +-- images
+| +-- icons
+| +-- fonts
+| +-- components
++-- public
+| +-- index.html
+| +-- manifest.json
+| +-- reset.css
+| +-- robots.txt
 
-In the project directory, you can run:
+## Scripts Disponíveis
+
+No diretório desse projeto você pode rodar:
 
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Inicia a aplicação no [http://localhost:3000](http://localhost:3000) em modo de desenvolvimento.<br>
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A página vai atualizar automaticamente de acordo com as alterações no código e os erros vão aparecer no console.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Esse comando constroi a aplicação para produção criando uma pasta chamada `build`.<br>
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### `npm run deploy`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Esse comando coloca a aplicação em produção, os arquivos da pasta `build` serão enviados para o projeto no Google Firebase.<br>
 
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

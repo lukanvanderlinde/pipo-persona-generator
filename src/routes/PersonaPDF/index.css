@@ -1,10 +1,19 @@
-.pdf-body {
-  width: 210mm !important;
-  height: 297mm !important;
+#persona-pdf-template {
+  min-width: 210mm !important;
+  min-height: 297mm !important;
+
+  max-width: 210mm !important;
+  max-height: 297mm !important;
+
   border-radius: 5px;
   -webkit-box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.23);
   box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.23);
+}
+
+.block-overflow {
+  height: 100%;
+  overflow-y: hidden !important;
 }
 
 .box-description {
@@ -40,4 +49,36 @@
 
 .main-body {
   padding: 2rem;
+}
+
+.email-converter {
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* background-color: #6442fb; */
+  background-color: white;
+
+  -webkit-box-shadow: 2px -2px 15px 0px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 2px -2px 15px 0px rgba(0, 0, 0, 0.23);
+  box-shadow: 2px -2px 15px 0px rgba(0, 0, 0, 0.23);
+}
+
+.show-in-print {
+  display: none;
+}
+@media (orientation: portrait) {
+  .hide-in-print {
+    /* display: none; */
+  }
+}
+
+@media print {
+  .hide-in-print {
+    display: none;
+  }
+
+  .show-in-print {
+    display: block;
+  }
 }
